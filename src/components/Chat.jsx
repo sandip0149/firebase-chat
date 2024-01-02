@@ -15,7 +15,20 @@ const Chat = () => {
         alignItems="center"
         p={4}
       >
-        <Stack>
+        <Stack direction="row" alignItems="center" spacing={3}>
+        <Stack
+          borderRadius="50%"
+          sx={{
+            minHeight: 60,
+            minWidth: 60,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundImage:
+            
+            
+            "url(https://img.freepik.com/premium-psd/3d-cartoon-man-smiling-portrait-isolated-transparent-background-png-psd_888962-1570.jpg)",
+          }}
+        ></Stack>
           <Typography variant="h6">User Name</Typography>
         </Stack>
         <Stack direction="row" spacing={4}>
