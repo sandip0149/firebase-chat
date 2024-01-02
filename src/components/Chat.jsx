@@ -51,10 +51,15 @@ const Chat = () => {
           </Stack>
         </Stack>
         <Divider />
-        <Stack minHeight={"75vh"}>
+        <Stack
+          height={"75vh"}
+          sx={{
+            overflowY: "scroll",
+          }}
+        >
           <Messages />
         </Stack>
-        <Divider/>
+        <Divider />
 
         <Stack justifyContent="flex-end">
           <MessageInput />
