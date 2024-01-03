@@ -1,8 +1,12 @@
 import { Card, Divider, Grid, Stack } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import Chat from "../components/Chat";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Home = () => {
+  const {currUser} = useContext(AuthContext)
+  console.log(currUser);
   return (
     <Card
       sx={{

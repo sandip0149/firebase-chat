@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -6,7 +6,17 @@ import Home from "./pages/Home";
 import { createTheme } from "./theme";
 import { SettingsConsumer, SettingsProvider } from "./context/settings";
 import { ThemeProvider } from "@mui/material/styles";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 function App() {
+  const { currUser } = useContext(AuthContext);
+  const ProtectedRoute = ({ children }) => {
+    if (!currUser) {
+      return <Navigate to="/login" />;
+    }
+
+    return children
+  };
   return (
     <>
       <SettingsProvider>
@@ -30,7 +40,14 @@ function App() {
             return (
               <ThemeProvider theme={theme}>
                 <Routes>
-                  <Route path="/" element={<Home/>} />
+                  <Route
+                    path="/"
+                    element={
+                      <ProtectedRoute>
+                        <Home />
+                      </ProtectedRoute>
+                    }
+                  />
                   <Route path="/login" element={<Login />} />
                   <Route path="register" element={<SignUp />} />
                 </Routes>

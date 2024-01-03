@@ -13,7 +13,9 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-
+import {auth,db} from '../firebase'
+import { createUserWithEmailAndPassword ,updateProfile} from "firebase/auth";
+import { setDoc,doc } from "firebase/firestore";
 const initialValues = {
   email: "",
   name: "",
@@ -31,12 +33,31 @@ const validationSchema = Yup.object({
   policy: Yup.boolean().oneOf([true], "This field must be checked"),
 });
 const SignUp = () => {
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: () => {},
+    onSubmit: () => {
+       createUserWithEmailAndPassword(auth,formik.values.email,formik.values.password)
+       .then(async (user)=>{
+          await updateProfile(user.user,{
+            displayName:formik.values.name
+          })
+          await setDoc(doc(db,"user",user.user.uid),{
+            uid:user.user.uid,
+            displayName:user.user.displayName,
+            email:user.user.email
+            
+          })
+          await setDoc(doc(db,"userChats",user.user.uid),{})
+          navigate("/")
+       })
+       .catch(err => {
+        console.log(err);
+       })
+    },
   });
-  const navigate = useNavigate()
+  
   return (
     <>
       <div

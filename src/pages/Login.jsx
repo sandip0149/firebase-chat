@@ -11,10 +11,12 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 const initialValues = {
-  email: "sandip@gmail.com",
-  password: "Password123!",
+  email: "",
+  password: "",
   submit: null,
 };
 
@@ -30,7 +32,16 @@ const Login = () => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: () => {},
+    onSubmit: () => {
+      
+      signInWithEmailAndPassword(auth,formik.values.email,formik.values.password)
+      .then(()=>{
+        navigate("/")
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    },
   });
   const navigate = useNavigate()
 
