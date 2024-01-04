@@ -29,7 +29,7 @@ const Chats = () => {
 
   return (
     <>
-      {Object.entries(chats)?.map((chat) => {
+      {chats && Object.entries(chats)?.map((chat) => {
         return (
           <>
             <div key={chat[0]} onClick={()=>{handleSelect(chat[1].userInfo)}}>
