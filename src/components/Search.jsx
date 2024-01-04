@@ -37,7 +37,7 @@ const Search = () => {
     const combineId = currUser.uid > user.uid ? currUser.uid+user.uid : user.uid+currUser.uid;
      
       const res = await getDoc(doc(db,"chats",combineId));
-      console.log(res);
+     
       if(!res.exists()){
         //craete chat
         await setDoc(doc(db,"chats",combineId),{messages:[]})
