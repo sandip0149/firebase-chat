@@ -29,7 +29,7 @@ const Search = () => {
         setUser(doc.data());
       });
     } catch (err) {
-      console.log(err);
+      seterr(true)
     }
   };
   const handleSlect = async () =>{
