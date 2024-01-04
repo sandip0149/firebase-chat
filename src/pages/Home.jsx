@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const Home = () => {
   const {currUser} = useContext(AuthContext)
-  console.log(currUser);
+ 
   return (
     <Card
       sx={{

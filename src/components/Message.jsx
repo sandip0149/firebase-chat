@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { formatDistanceToNowStrict } from "date-fns";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -7,10 +7,16 @@ import CardMedia from "@mui/material/CardMedia";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { AuthContext } from "../context/AuthContext";
 
-const Message = ({ contentType, createdAt, position }) => {
-  const ago = formatDistanceToNowStrict(createdAt);
+const Message = ({ contentType, date , senderId , text , img}) => {
+   
+  const dates = new Date(date.seconds * 1000 + date.nanoseconds / 1e6);
+  const ago = formatDistanceToNowStrict(dates);
+  const {currUser} = useContext(AuthContext)
+  const position = senderId == currUser.uid ? "right" : "left"
   return (
+
     <>
       <Box
         sx={{
@@ -49,7 +55,7 @@ const Message = ({ contentType, createdAt, position }) => {
                 py: 1,
               }}
             >
-              <Box sx={{ mb: 1 }}>
+              {/* <Box sx={{ mb: 1 }}>
                 <Link
                   color="inherit"
                   sx={{ cursor: "pointer" }}
@@ -57,7 +63,7 @@ const Message = ({ contentType, createdAt, position }) => {
                 >
                   User
                 </Link>
-              </Box>
+              </Box> */}
               {contentType === "image" && (
                 <CardMedia
                   onClick={() => {}}
@@ -69,8 +75,8 @@ const Message = ({ contentType, createdAt, position }) => {
                 />
               )}
               {contentType === "text" && (
-                <Typography color="inherit" variant="body1">
-                  sample message
+                <Typography color="inherit" variant="body1" width="max-content">
+                  {text}
                 </Typography>
               )}
             </Card>

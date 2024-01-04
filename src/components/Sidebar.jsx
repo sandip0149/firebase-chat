@@ -8,14 +8,7 @@ const Sidebar = () => {
     <>
       <Navbar />
       <Search/>
-      {
-        [1,2,3,4].map((i)=>{
-          return(
-            <Chats key={i}/>
-          )
-         
-        })
-      }
+       
       
       <Chats/>
     </>
