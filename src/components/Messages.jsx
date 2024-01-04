@@ -31,11 +31,11 @@ const Messages = () => {
       >
         {
           message.map((msg,i) => {
-           console.log(msg);
+           
             return(
               <>
               
-               <Message contentType="text" createdAt={now} position="right" key={i} {...msg} />
+               <Message   createdAt={now} position="right" key={i} {...msg} />
               </>
              
             );

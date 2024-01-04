@@ -9,14 +9,13 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { AuthContext } from "../context/AuthContext";
 
-const Message = ({ contentType, date , senderId , text , img}) => {
-   
+const Message = ({ date, senderId, text, img }) => {
+  const contentType = text ? "text" : "image";
   const dates = new Date(date.seconds * 1000 + date.nanoseconds / 1e6);
   const ago = formatDistanceToNowStrict(dates);
-  const {currUser} = useContext(AuthContext)
-  const position = senderId == currUser.uid ? "right" : "left"
+  const { currUser } = useContext(AuthContext);
+  const position = senderId == currUser.uid ? "right" : "left";
   return (
-
     <>
       <Box
         sx={{
@@ -67,7 +66,7 @@ const Message = ({ contentType, date , senderId , text , img}) => {
               {contentType === "image" && (
                 <CardMedia
                   onClick={() => {}}
-                  image="https://cdn.pixabay.com/photo/2016/12/03/15/44/fireworks-1880045_1280.jpg"
+                  image={img}
                   sx={{
                     height: 200,
                     width: 200,

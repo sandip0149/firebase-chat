@@ -9,7 +9,7 @@ import { collection, where, query, getDocs, setDoc, documentId, doc, updateDoc, 
 import {AuthContext }from "../context/AuthContext"
 const Search = () => {
   const [name, setName] = useState("");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const [err, seterr] = useState(false);
   const {currUser} = useContext(AuthContext)
   const handleSearch = async () => {
