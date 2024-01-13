@@ -28,9 +28,7 @@ const Chat = () => {
                 minWidth: 60,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
-                backgroundImage:
-                  "url(https://img.freepik.com/premium-psd/3d-cartoon-man-smiling-portrait-isolated-transparent-background-png-psd_888962-1570.jpg)",
-              }}
+                backgroundImage: `url(${data.user.photoUrl?  data.user.photoUrl : "https://img.freepik.com/premium-psd/3d-cartoon-man-smiling-portrait-isolated-transparent-background-png-psd_888962-1570.jpg"})` }}
             ></Stack>
             <Typography variant="h6">{data.user?.displayName || "FireUser"}</Typography>
           </Stack>

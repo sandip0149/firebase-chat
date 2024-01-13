@@ -52,16 +52,18 @@ const Chats = () => {
                     minWidth: 60,
                     backgroundPosition: "center",
                     backgroundSize: "cover",
-                    backgroundImage:
-                      "url(https://img.freepik.com/premium-psd/3d-cartoon-man-smiling-portrait-isolated-transparent-background-png-psd_888962-1570.jpg)",
-                  }}
+                    backgroundImage: `url(${chat[1]?.userInfo.photoUrl?  chat[1]?.userInfo.photoUrl : "https://img.freepik.com/premium-psd/3d-cartoon-man-smiling-portrait-isolated-transparent-background-png-psd_888962-1570.jpg"})` }}
                 ></Stack>
                 <Stack>
                   <Typography fontWeight="bold">
                     {chat[1]?.userInfo.displayName || "fIREuSER"}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    User message
+                    
+                    {
+                         chat[1]?.lastMessage?.img? "image" : chat[1]?.lastMessage?.text    
+                    }
+                    
                   </Typography>
                 </Stack>
               </Stack>

@@ -6,7 +6,7 @@ import { AiOutlineSend, AiOutlineFileImage } from "react-icons/ai";
 import { RiImageAddFill } from "react-icons/ri";
 import { GoPaperclip } from "react-icons/go";
 import { useRef } from "react";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { ChatContext } from "../context/ChatContext";
 import { AuthContext } from "../context/AuthContext";
@@ -71,6 +71,7 @@ const MessageInput = () => {
                 }),
               });
             }
+             
           });
         }
       );
@@ -83,8 +84,42 @@ const MessageInput = () => {
           date: new Date(),
         }),
       });
-      setText("");
+      
     }
+    
+
+    if(text){
+      await updateDoc(doc(db,"userChats",currUser.uid),{
+        [data.chatId + ".lastMessage"]:{
+          text
+        },
+        [data.chatId + ".date"]:serverTimestamp(),
+      })
+      await updateDoc(doc(db,"userChats",data.user.uid),{
+        [data.chatId + ".lastMessage"]:{
+          text
+        },
+        [data.chatId + ".date"]:serverTimestamp(),
+      })
+    }
+    if(img){
+      await updateDoc(doc(db,"userChats",currUser.uid),{
+        [data.chatId + ".lastMessage"]:{
+          img
+        },
+        [data.chatId + ".date"]:serverTimestamp(),
+      })
+      await updateDoc(doc(db,"userChats",data.user.uid),{
+        [data.chatId + ".lastMessage"]:{
+          img
+        },
+        [data.chatId + ".date"]:serverTimestamp(),
+      })
+    }
+    
+    setText("");
+    setImg(null);
+
   };
   return (
     <>
